@@ -14,7 +14,13 @@ import com.example.k2p.core.presentation.BaseFragment
 import com.example.k2p.core.presentation.BaseViewState
 import com.example.k2p.databinding.MealFragmentBinding
 import com.example.k2p.domain.model.Category
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.WithFragmentBindings
+import kotlinx.coroutines.DelicateCoroutinesApi
 
+@AndroidEntryPoint
+@WithFragmentBindings
+@DelicateCoroutinesApi
 class MealFragment : BaseFragment(R.layout.meal_fragment) {
     private lateinit var binding: MealFragmentBinding
 
@@ -26,13 +32,15 @@ class MealFragment : BaseFragment(R.layout.meal_fragment) {
         mealViewModel.apply {
             observe(state, ::onViewStateChanged)
             failure(failure,::handleFailure)
+
+            doGetAllCategories()
         }
     }
 
     override fun onViewStateChanged(state: BaseViewState?) {
         super.onViewStateChanged(state)
         when(state){
-
+            is MealViewState.CategoriesReceived -> setUpAdapter(state.categories)
         }
     }
 
@@ -40,6 +48,10 @@ class MealFragment : BaseFragment(R.layout.meal_fragment) {
         adapter = MealAdapter()
 
         adapter.addData(meals)//addList
+
+        adapter.listener = {
+            navController.navigate(MealFragmentDirections.actionMealFragmentToFoodFragment())
+        }
 
         binding.recyclerMeals.apply {
             adapter = this@MealFragment.adapter

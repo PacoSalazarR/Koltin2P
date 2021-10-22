@@ -28,6 +28,7 @@
             android:id="@+id/recyclerMeals"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="10"
             tools:listitem="@layout/row_meal"/>
 

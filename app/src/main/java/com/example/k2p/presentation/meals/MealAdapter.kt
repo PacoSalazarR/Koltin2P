@@ -2,17 +2,18 @@ package com.example.k2p.presentation.meals
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.k2p.databinding.RowMealBinding
 import com.example.k2p.domain.model.Category
 
-
+@SuppressLint("NotifyDataSetChanged")
 class MealAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var list: MutableList<Category> = mutableListOf()
+    lateinit var listener: (category: Category) -> Unit
 
-    @SuppressLint("NotifyDataSetChanged")
     fun addData(list: List<Category>){
         this.list = list.toMutableList()
 
@@ -24,14 +25,23 @@ class MealAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     )
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = (holder as ViewHolderItem).bind(
-        list[position]
+        list[position], listener
     )
 
     override fun getItemCount() = list.size
 
-    class ViewHolderItem(private val binding: RowMealBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(data: Category) {
+    class ViewHolderItem(private val binding: RowMealBinding) :
+        RecyclerView.ViewHolder(binding.root){
+        fun bind(data: Category, listener: (category: Category) -> Unit) {
             binding.item = data
+
+            binding.root.setOnClickListener{
+                listener(data)
+            }
         }
     }
+}
+
+abstract class BaseViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
+    abstract fun bind(data: Category, listener: (category: Category) -> Unit)
 }
