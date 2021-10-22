@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/mealFragment">
+
+    <fragment
+        android:id="@+id/mealFragment"
+        android:name="com.example.k2p.presentation.meals.MealFragment"
+        android:label="meal_fragment"
+        tools:layout="@layout/meal_fragment" />
+    <fragment
+        android:id="@+id/randomMealFragment"
+        android:name="com.example.k2p.presentation.meals.RandomMealFragment"
+        android:label="random_meal_fragment"
+        tools:layout="@layout/random_meal_fragment" />
+</navigation>

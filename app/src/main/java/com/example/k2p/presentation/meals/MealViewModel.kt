@@ -1,7 +1,7 @@
 package com.example.k2p.presentation.meals
 
-import androidx.lifecycle.ViewModel
+import com.example.k2p.core.presentation.BaseViewModel
 
-class MealViewModel : ViewModel() {
+class MealViewModel : BaseViewModel() {
     // TODO: Implement the ViewModel
 }

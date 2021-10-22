@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/mealFragment"
+        android:icon="@drawable/ic_home"
+        android:orderInCategory="1"
+        android:title="@string/text_meals"
+        app:showAsAction="always"/>
+    <item android:id="@+id/randomMealFragment"
+        android:icon="@drawable/ic_random"
+        android:orderInCategory="2"
+        android:title="@string/text_random"
+        app:showAsAction="always"/>
+    <item android:id="@+id/account"
+        android:icon="@drawable/ic_profile"
+        android:orderInCategory="3"
+        android:title="@string/text_account"
+        app:showAsAction="always"/>
+</menu>

@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">K2P</string>
     <string name="category">Category</string>
+    <string name="text_meals">Meals</string>
+    <string name="text_random">Random</string>
+    <string name="text_account">Account</string>
 </resources>

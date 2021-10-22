@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="item"
+            type="com.example.k2p.domain.model.Category" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -21,6 +26,7 @@
             android:layout_width="0dp"
             android:layout_marginStart="15dp"
             tools:text="@string/category"
+            android:text="@{item.category}"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/imgCategory"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,6 +36,7 @@
             android:id="@+id/txtViewDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="@{item.description}"
             app:layout_constraintStart_toStartOf="@id/txtViewName"
             app:layout_constraintEnd_toEndOf="@id/txtViewName"
             app:layout_constraintTop_toBottomOf="@id/txtViewName"
