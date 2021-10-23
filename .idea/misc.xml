@@ -4,10 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/franp/OneDrive/Documentos/universidad/5 sem/andrd2/Koltin2P/app/src/main/res/layout/activity_main.xml" value="0.1793478260869565" />
-        <entry key="..\:/Users/franp/OneDrive/Documentos/universidad/5 sem/andrd2/Koltin2P/app/src/main/res/layout/meal_fragment.xml" value="0.259375" />
+        <entry key="..\:/Users/franp/OneDrive/Documentos/universidad/5 sem/andrd2/Koltin2P/app/src/main/res/layout/food_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/franp/OneDrive/Documentos/universidad/5 sem/andrd2/Koltin2P/app/src/main/res/layout/grid_food.xml" value="0.11583011583011583" />
+        <entry key="..\:/Users/franp/OneDrive/Documentos/universidad/5 sem/andrd2/Koltin2P/app/src/main/res/layout/meal_fragment.xml" value="0.1" />
         <entry key="..\:/Users/franp/OneDrive/Documentos/universidad/5 sem/andrd2/Koltin2P/app/src/main/res/layout/progress_layout.xml" value="0.259375" />
         <entry key="..\:/Users/franp/OneDrive/Documentos/universidad/5 sem/andrd2/Koltin2P/app/src/main/res/layout/random_meal_fragment.xml" value="0.259375" />
-        <entry key="..\:/Users/franp/OneDrive/Documentos/universidad/5 sem/andrd2/Koltin2P/app/src/main/res/layout/row_meal.xml" value="0.259375" />
+        <entry key="..\:/Users/franp/OneDrive/Documentos/universidad/5 sem/andrd2/Koltin2P/app/src/main/res/layout/row_meal.xml" value="0.1" />
         <entry key="..\:/Users/franp/OneDrive/Documentos/universidad/5 sem/andrd2/Koltin2P/app/src/main/res/menu/bottom_menu_nav.xml" value="0.259375" />
       </map>
     </option>

@@ -3,7 +3,9 @@ package com.example.k2p.core.di
 import com.example.k2p.core.platform.NetworkHandler
 import com.example.k2p.data.api.MealApi
 import com.example.k2p.data.source.CategoryRepositoryImpl
+import com.example.k2p.data.source.FoodRepositoryImpl
 import com.example.k2p.domain.repository.CategoryRepository
+import com.example.k2p.domain.repository.FoodRepository
 import com.example.k2p.framework.api.ApiProvider
 import dagger.Module
 import dagger.Provides
@@ -20,4 +22,11 @@ object RepositoryModule {
         apiProvider: ApiProvider,
         networkHandler: NetworkHandler
     ): CategoryRepository = CategoryRepositoryImpl(apiProvider.getEndpoint(MealApi::class.java),networkHandler)
+
+    @Provides
+    @Singleton
+    fun provideFoodRepository(
+        apiProvider: ApiProvider,
+        networkHandler: NetworkHandler
+    ): FoodRepository = FoodRepositoryImpl(apiProvider.getEndpoint(MealApi::class.java),networkHandler)
 }

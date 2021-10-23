@@ -24,7 +24,7 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 class MealFragment : BaseFragment(R.layout.meal_fragment) {
     private lateinit var binding: MealFragmentBinding
 
-    private lateinit var adapter: MealAdapter
+    private val adapter: MealAdapter by lazy { MealAdapter() }
     private val mealViewModel by viewModels<MealViewModel> ()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,16 +45,17 @@ class MealFragment : BaseFragment(R.layout.meal_fragment) {
     }
 
     private fun setUpAdapter(meals: List<Category>){
-        adapter = MealAdapter()
+        //adapter = MealAdapter()
 
         adapter.addData(meals)//addList
 
         adapter.listener = {
-            navController.navigate(MealFragmentDirections.actionMealFragmentToFoodFragment())
+            navController.navigate(MealFragmentDirections.actionMealFragmentToFoodFragment(it))
         }
 
         binding.recyclerMeals.apply {
             adapter = this@MealFragment.adapter
+
         }
     }
 

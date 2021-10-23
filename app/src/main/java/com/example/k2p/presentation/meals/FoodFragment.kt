@@ -6,27 +6,64 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.navigation.NavArgs
+import androidx.navigation.fragment.navArgs
 import com.example.k2p.R
+import com.example.k2p.core.extension.failure
+import com.example.k2p.core.extension.observe
+import com.example.k2p.core.presentation.BaseFragment
+import com.example.k2p.core.presentation.BaseViewState
+import com.example.k2p.databinding.FoodFragmentBinding
+import com.example.k2p.domain.model.Food
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.WithFragmentBindings
+import kotlinx.coroutines.DelicateCoroutinesApi
 
-class FoodFragment : Fragment() {
+@AndroidEntryPoint
+@WithFragmentBindings
+@DelicateCoroutinesApi
+class FoodFragment : BaseFragment(R.layout.food_fragment) {
 
-    companion object {
-        fun newInstance() = FoodFragment()
+    private lateinit var binding: FoodFragmentBinding
+    private val adapter: FoodAdapter by lazy { FoodAdapter() }
+
+    private val args: FoodFragmentArgs by navArgs()
+
+    private val foodViewModel by viewModels<FoodViewModel>()
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        foodViewModel.apply {
+            observe(state, ::onViewStateChanged)
+            failure(failure, ::handleFailure)
+
+            doGetFoodsByCategory(args.category.category)
+        }
     }
 
-    private lateinit var viewModel: FoodViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.food_fragment, container, false)
+    override fun onViewStateChanged(state: BaseViewState?) {
+        super.onViewStateChanged(state)
+        when(state) {
+            is FoodViewState.FoodsReceived -> setUpAdapter(state.foods)
+        }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(FoodViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun setUpAdapter(foods: List<Food>){
+        //adapter = FoodAdapter()
+
+        adapter.addData(foods)
+
+        binding.recyclerFoods.apply {
+            adapter = this@FoodFragment.adapter
+        }
+    }
+
+    override fun setBinding(view: View) {
+        binding = FoodFragmentBinding.bind(view)
+
+        binding.lifecycleOwner = this
     }
 
 }

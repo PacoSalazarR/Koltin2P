@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.k2p.databinding.RowMealBinding
 import com.example.k2p.domain.model.Category
 
@@ -34,6 +35,8 @@ class MealAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root){
         fun bind(data: Category, listener: (category: Category) -> Unit) {
             binding.item = data
+
+            binding.imgCategory.load(data.urlThumb)
 
             binding.root.setOnClickListener{
                 listener(data)
