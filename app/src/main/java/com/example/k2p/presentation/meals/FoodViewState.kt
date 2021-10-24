@@ -5,4 +5,6 @@ import com.example.k2p.domain.model.Food
 
 sealed class FoodViewState: BaseViewState() {
     data class FoodsReceived(val foods: List<Food>): BaseViewState()
+
+    data class FoodReceived(val food: Food): BaseViewState()
 }

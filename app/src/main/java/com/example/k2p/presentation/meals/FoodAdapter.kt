@@ -20,17 +20,17 @@ class FoodAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolderItem(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolderGridItem(
         GridFoodBinding.inflate(LayoutInflater.from(parent.context),parent,false)
     )
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = (holder as ViewHolderItem).bind(
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = (holder as ViewHolderGridItem).bind(
         list[position]
     )
 
     override fun getItemCount() = list.size
 
-    class ViewHolderItem(private val  binding: GridFoodBinding) :
+    class ViewHolderGridItem(private val  binding: GridFoodBinding) :
         RecyclerView.ViewHolder(binding.root){
 
         fun bind(data: Food) {

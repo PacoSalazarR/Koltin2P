@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.meals.RandomMealFragment">
+    <data>
+        <variable
+            name="food"
+            type="com.example.k2p.domain.model.Food" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,6 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             tools:text="Food Name"
+            android:text="@{food.mealName}"
             android:layout_marginTop="30dp"
             app:layout_constraintStart_toStartOf="@id/imgMeal"
             app:layout_constraintEnd_toEndOf="@id/imgMeal"
@@ -30,6 +36,7 @@
         <TextView
             android:layout_marginTop="10dp"
             android:id="@+id/txtViewCategory"
+            android:text="@{food.mealCategory}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/imgMeal"
@@ -41,6 +48,7 @@
             android:id="@+id/txtViewArea"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="@{food.area}"
             app:layout_constraintStart_toEndOf="@id/txtViewCategory"
             app:layout_constraintEnd_toEndOf="@id/imgMeal"
             app:layout_constraintTop_toTopOf="@id/txtViewCategory"
@@ -51,6 +59,7 @@
             android:layout_marginBottom="10dp"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:text="@{food.instructions}"
             app:layout_constraintStart_toStartOf="@id/imgMeal"
             app:layout_constraintEnd_toEndOf="@id/imgMeal"
             app:layout_constraintTop_toBottomOf="@id/txtViewCategory"
