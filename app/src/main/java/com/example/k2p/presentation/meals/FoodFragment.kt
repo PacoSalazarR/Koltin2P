@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.k2p.R
 import com.example.k2p.core.extension.failure
 import com.example.k2p.core.extension.observe
@@ -45,7 +47,7 @@ class FoodFragment : BaseFragment(R.layout.food_fragment) {
     override fun onViewStateChanged(state: BaseViewState?) {
         super.onViewStateChanged(state)
         when(state) {
-            is FoodViewState.FoodsReceived -> setUpAdapter(state.foods)
+            is FoodViewState.FoodsReceived -> setUpAdapter(state.meals)
         }
     }
 
@@ -62,7 +64,21 @@ class FoodFragment : BaseFragment(R.layout.food_fragment) {
     override fun setBinding(view: View) {
         binding = FoodFragmentBinding.bind(view)
 
+        binding.recyclerFoods.layoutManager = GridLayoutManager(requireContext(),3)
+
         binding.lifecycleOwner = this
+
+        binding.searchViewFood.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                foodViewModel.doGetFoodsByName(query ?: "")
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                foodViewModel.doGetFoodsByName(newText ?: "")
+                return true
+            }
+        })
     }
 
 }

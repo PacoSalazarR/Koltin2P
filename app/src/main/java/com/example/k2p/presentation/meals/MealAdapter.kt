@@ -2,7 +2,6 @@ package com.example.k2p.presentation.meals
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -43,8 +42,4 @@ class MealAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
         }
     }
-}
-
-abstract class BaseViewHolder(private val root: View) : RecyclerView.ViewHolder(root) {
-    abstract fun bind(data: Category, listener: (category: Category) -> Unit)
 }

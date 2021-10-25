@@ -1,10 +1,8 @@
-package com.amalip.cocktailapp.core.di
+package com.example.k2p.core.di
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
-import com.amalip.cocktailapp.framework.db.CocktailDb
+import com.example.k2p.framework.db.FoodDb
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,29 +18,9 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
-    private val MIGRATION_1_2 = object : Migration(1, 2) {
-        override fun migrate(database: SupportSQLiteDatabase) {
-            database.execSQL("ALTER TABLE Cocktail ADD COLUMN alcoholic TEXT")
-        }
-    }
-
-    private val MIGRATION_2_3 = object : Migration(2, 3) {
-        override fun migrate(database: SupportSQLiteDatabase) {
-            database.execSQL("ALTER TABLE Cocktail ADD COLUMN instructions TEXT")
-        }
-    }
-
-    private val MIGRATION_3_4 = object : Migration(3, 4) {
-        override fun migrate(database: SupportSQLiteDatabase) {
-            database.execSQL("CREATE TABLE IF NOT EXISTS User(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL, mail TEXT NOT NULL, img TEXT NOT NULL, token TEXT NOT NULL)")
-        }
-    }
-
     @Provides
     @Singleton
     fun provideCocktailDb(@ApplicationContext context: Context) =
-        Room.databaseBuilder(context, CocktailDb::class.java, "cocktails").addMigrations(
-            MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4
+        Room.databaseBuilder(context, FoodDb::class.java, "foods").addMigrations(
         ).build()
-
 }

@@ -12,6 +12,9 @@
             android:id="@+id/searchViewFood"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:inputType="textFilter"
+            app:iconifiedByDefault="false"
+            app:queryHint="Meal Name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -29,7 +32,7 @@
                 android:id="@+id/recyclerFoods"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 tools:itemCount="10"
                 tools:listitem="@layout/grid_food"/>
 

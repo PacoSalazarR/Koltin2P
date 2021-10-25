@@ -4,6 +4,7 @@ import com.example.k2p.core.exception.Failure
 import com.example.k2p.core.functional.Either
 import com.example.k2p.core.platform.NetworkHandler
 import com.example.k2p.data.api.MealApi
+import com.example.k2p.data.dao.FoodDao
 import com.example.k2p.data.dto.FoodResponse
 import com.example.k2p.data.dto.FoodsResponse
 import com.example.k2p.domain.model.Food
@@ -13,19 +14,34 @@ import javax.inject.Inject
 
 class FoodRepositoryImpl @Inject constructor(
     private val mealApi: MealApi,
+    private val foodDao: FoodDao,
     private val networkHandler: NetworkHandler
     ):
     FoodRepository, ApiRequest {
-    override fun getFoodsByCategory(category: String) = makeRequest(
-        networkHandler, mealApi.getFoodsByCategory(category), { it }, FoodsResponse(
-                emptyList()
+    override fun getFoodsByCategory(category: String) : Either<Failure, FoodsResponse>{
+        val result = makeRequest(networkHandler, mealApi.getFoodsByCategory(category), { it }, FoodsResponse(emptyList()))
+
+        return if (result.isLeft){
+            val localResult = foodDao.getFoodsByCategory("%$category%")
+
+            if (localResult.isEmpty()) result
+            else Either.Right(FoodsResponse(localResult))
+        } else result
+    }
+
+    override fun getFoodsByName(name: String) = makeRequest(networkHandler, mealApi.getFoodsByName(name), {it}, FoodsResponse())
+
+    override fun getFoodById(id: String) = makeRequest(networkHandler, mealApi.getFoodById(id), { it }, FoodsResponse())
+
+
+    override fun getRandomFood() = makeRequest(
+        networkHandler, mealApi.getRandomFood(), {it}, FoodsResponse(
+            emptyList()
         )
     )
 
-    override fun getRandomFood() = makeRequest(
-        networkHandler, mealApi.getRandomFood(), {it}, FoodResponse(
-            Food()
-        )
-    )
+    override fun saveFoods(foods: List<Food>): Either<Failure, Boolean> {
+        TODO("Not yet implemented")
+    }
 
 }

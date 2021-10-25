@@ -7,6 +7,7 @@ import com.example.k2p.data.source.FoodRepositoryImpl
 import com.example.k2p.domain.repository.CategoryRepository
 import com.example.k2p.domain.repository.FoodRepository
 import com.example.k2p.framework.api.ApiProvider
+import com.example.k2p.framework.db.FoodDb
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,13 +21,15 @@ object RepositoryModule {
     @Singleton
     fun provideCategoryRepository(
         apiProvider: ApiProvider,
+        foodDb: FoodDb,
         networkHandler: NetworkHandler
-    ): CategoryRepository = CategoryRepositoryImpl(apiProvider.getEndpoint(MealApi::class.java),networkHandler)
+    ): CategoryRepository = CategoryRepositoryImpl(apiProvider.getEndpoint(MealApi::class.java),networkHandler = networkHandler, foodDao = foodDb.foodDao())
 
     @Provides
     @Singleton
     fun provideFoodRepository(
         apiProvider: ApiProvider,
+        foodDb: FoodDb,
         networkHandler: NetworkHandler
-    ): FoodRepository = FoodRepositoryImpl(apiProvider.getEndpoint(MealApi::class.java),networkHandler)
+    ): FoodRepository = FoodRepositoryImpl(apiProvider.getEndpoint(MealApi::class.java),networkHandler = networkHandler, foodDao = foodDb.foodDao())
 }
