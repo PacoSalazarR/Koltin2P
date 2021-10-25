@@ -12,7 +12,7 @@ import com.example.k2p.domain.model.Food
 class FoodAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var list: MutableList<Food> = mutableListOf()
-
+    lateinit var listener: (food: Food) -> Unit
 
     fun addData(list: List<Food>){
         this.list = list.toMutableList()
@@ -25,7 +25,7 @@ class FoodAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     )
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) = (holder as ViewHolderGridItem).bind(
-        list[position]
+        list[position], listener
     )
 
     override fun getItemCount() = list.size
@@ -33,10 +33,14 @@ class FoodAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class ViewHolderGridItem(private val  binding: GridFoodBinding) :
         RecyclerView.ViewHolder(binding.root){
 
-        fun bind(data: Food) {
+        fun bind(data: Food, listener: (food: Food)->Unit) {
             binding.item = data
 
             binding.imgFood.load(data.urlMealThumb)
+
+            binding.root.setOnClickListener {
+                listener(data)
+            }
         }
     }
 }

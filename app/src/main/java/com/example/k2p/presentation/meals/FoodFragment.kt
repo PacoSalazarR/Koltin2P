@@ -52,9 +52,12 @@ class FoodFragment : BaseFragment(R.layout.food_fragment) {
     }
 
     private fun setUpAdapter(foods: List<Food>){
-        //adapter = FoodAdapter()
 
         adapter.addData(foods)
+
+        adapter.listener = {
+            navController.navigate(FoodFragmentDirections.actionFoodFragmentToDetailFoodFragment(it))
+        }
 
         binding.recyclerFoods.apply {
             adapter = this@FoodFragment.adapter

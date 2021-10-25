@@ -20,7 +20,7 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 class RandomMealFragment : BaseFragment(R.layout.random_meal_fragment) {
 
     private lateinit var binding: RandomMealFragmentBinding
-    private val adapter: FoodAdapter by lazy { FoodAdapter()}
+    private val adapter: RandomMealAdapter by lazy { RandomMealAdapter()}
 
     private val foodViewModel by viewModels<RandomMealViewModel>()
 
@@ -44,6 +44,9 @@ class RandomMealFragment : BaseFragment(R.layout.random_meal_fragment) {
     private fun setUpAdapter(foods: List<Food>){
         adapter.addData(foods)
 
+        binding.recyclerRandom.apply {
+            adapter = this@RandomMealFragment.adapter
+        }
     }
 
     override fun setBinding(view: View) {

@@ -28,5 +28,18 @@
         <argument
             android:name="category"
             app:argType="com.example.k2p.domain.model.Category"/>
+        <action
+            android:id="@+id/action_foodFragment_to_detailFoodFragment"
+            app:destination="@id/detailFoodFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFoodFragment"
+        android:name="com.example.k2p.presentation.mealdetail.DetailFoodFragment"
+        android:label="detail_food_fragment"
+        tools:layout="@layout/detail_food_fragment" >
+
+        <argument
+            android:name="food"
+            app:argType="com.example.k2p.domain.model.Food"/>
     </fragment>
 </navigation>
