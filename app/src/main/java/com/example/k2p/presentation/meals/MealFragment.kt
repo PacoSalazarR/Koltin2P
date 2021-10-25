@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.k2p.R
 import com.example.k2p.core.extension.failure
 import com.example.k2p.core.extension.observe
@@ -53,14 +54,18 @@ class MealFragment : BaseFragment(R.layout.meal_fragment) {
             navController.navigate(MealFragmentDirections.actionMealFragmentToFoodFragment(it))
         }
 
+
         binding.recyclerMeals.apply {
             adapter = this@MealFragment.adapter
 
         }
+
     }
 
     override fun setBinding(view: View) {
         binding = MealFragmentBinding.bind(view)
+
+        binding.recyclerMeals.layoutManager = LinearLayoutManager(requireContext())
 
         binding.lifecycleOwner = this
     }

@@ -29,19 +29,34 @@ class FoodRepositoryImpl @Inject constructor(
         } else result
     }
 
-    override fun getFoodsByName(name: String) = makeRequest(networkHandler, mealApi.getFoodsByName(name), {it}, FoodsResponse())
+    override fun getFoodsByName(name: String): Either<Failure, FoodsResponse>{
+        val result = makeRequest(networkHandler, mealApi.getFoodsByName(name), {it}, FoodsResponse(emptyList()))
 
-    override fun getFoodById(id: String) = makeRequest(networkHandler, mealApi.getFoodById(id), { it }, FoodsResponse())
+        return if (result.isLeft){
+            val localResult = foodDao.getFoodsByName("%$name%")
 
+            if(localResult.isEmpty()) result
+            else Either.Right(FoodsResponse(localResult))
+        } else result
+    }
 
-    override fun getRandomFood() = makeRequest(
-        networkHandler, mealApi.getRandomFood(), {it}, FoodsResponse(
-            emptyList()
-        )
-    )
+    override fun getFoodById(id: String): Either<Failure, FoodsResponse> {
+        val result = makeRequest(networkHandler, mealApi.getFoodById(id), { it }, FoodsResponse(emptyList()))
+
+        return if (result.isLeft){
+            val localResult = foodDao.getFoodsById("%$id%")
+
+            if(localResult.isEmpty()) result
+            else Either.Right(FoodsResponse(localResult))
+        } else result
+    }
+
+    override fun getRandomFood() = makeRequest(networkHandler, mealApi.getRandomFood(), {it}, FoodsResponse(emptyList()))
 
     override fun saveFoods(foods: List<Food>): Either<Failure, Boolean> {
-        TODO("Not yet implemented")
+        val result = foodDao.saveFoods(foods)
+        return if (result.size == foods.size) Either.Right(true)
+        else Either.Left(Failure.DatabaseError)
     }
 
 }

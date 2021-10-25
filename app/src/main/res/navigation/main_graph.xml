@@ -12,7 +12,11 @@
         tools:layout="@layout/meal_fragment" >
         <action
             android:id="@+id/action_mealFragment_to_foodFragment"
-            app:destination="@id/foodFragment" />
+            app:destination="@id/foodFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/randomMealFragment"
@@ -30,7 +34,11 @@
             app:argType="com.example.k2p.domain.model.Category"/>
         <action
             android:id="@+id/action_foodFragment_to_detailFoodFragment"
-            app:destination="@id/detailFoodFragment" />
+            app:destination="@id/detailFoodFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
     </fragment>
     <fragment
         android:id="@+id/detailFoodFragment"
