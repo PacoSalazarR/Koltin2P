@@ -6,27 +6,51 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.k2p.R
+import com.example.k2p.core.presentation.BaseFragment
+import com.example.k2p.databinding.SignUpFragmentBinding
+import com.example.k2p.domain.model.User
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.WithFragmentBindings
 
-class SignUpFragment : Fragment() {
+@AndroidEntryPoint
+@WithFragmentBindings
+class SignUpFragment : BaseFragment(R.layout.sign_up_fragment) {
 
-    companion object {
-        fun newInstance() = SignUpFragment()
+    private lateinit var user: User
+    private lateinit var binding: SignUpFragmentBinding
+    private val signUpViewModel by viewModels<SignUpViewModel>()
+    private var listUsers: MutableList<User> = mutableListOf()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        user = User(0,"","")
+        showToast("Inicio")
     }
 
-    private lateinit var viewModel: SignUpViewModel
+    override fun setBinding(view: View) {
+        binding = SignUpFragmentBinding.bind(view)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.sign_up_fragment, container, false)
+        binding.btnSignUp.setOnClickListener {
+            if(binding.txtSignUpName.text.isNotEmpty()&&binding.txtSignUpPassword.text.isNotEmpty()){
+                user.apply {
+                    userName = binding.txtSignUpName.text.toString()
+                    password = binding.txtSignUpPassword.text.toString()
+                }
+                listUsers.add(user)
+                signUpViewModel.saveUsers(listUsers)
+                listUsers.remove(user)
+            }else{
+                showToast("hola")
+            }
+        }
+
+        binding.txtGoToLogIn.setOnClickListener {
+            navController.navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
+        }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
 
 }

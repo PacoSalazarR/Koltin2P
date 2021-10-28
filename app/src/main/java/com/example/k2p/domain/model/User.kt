@@ -12,8 +12,8 @@ import kotlinx.parcelize.Parcelize
 class User (
     @PrimaryKey(autoGenerate = true)
     val idUser: Int = 0,
-    val userName: String = "",
-    val password: String = ""
+    var userName: String = "",
+    var password: String = ""
     //val mail: String = "",
     //val img: String = "",
     //val token: String = ""
