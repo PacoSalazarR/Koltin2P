@@ -33,8 +33,6 @@ class MealFragment : BaseFragment(R.layout.meal_fragment) {
         mealViewModel.apply {
             observe(state, ::onViewStateChanged)
             failure(failure,::handleFailure)
-
-            doGetAllCategories()
         }
     }
 
@@ -43,17 +41,18 @@ class MealFragment : BaseFragment(R.layout.meal_fragment) {
         when(state){
             is MealViewState.CategoriesReceived -> setUpAdapter(state.categories)
         }
+
     }
 
     private fun setUpAdapter(meals: List<Category>){
         //adapter = MealAdapter()
+
 
         adapter.addData(meals)//addList
 
         adapter.listener = {
             navController.navigate(MealFragmentDirections.actionMealFragmentToFoodFragment(it))
         }
-
 
         binding.recyclerMeals.apply {
             adapter = this@MealFragment.adapter
@@ -63,6 +62,8 @@ class MealFragment : BaseFragment(R.layout.meal_fragment) {
     }
 
     override fun setBinding(view: View) {
+        mealViewModel.doGetAllCategories()
+
         binding = MealFragmentBinding.bind(view)
 
         binding.recyclerMeals.layoutManager = LinearLayoutManager(requireContext())

@@ -51,7 +51,16 @@ class FoodRepositoryImpl @Inject constructor(
         } else result
     }
 
-    override fun getRandomFood() = makeRequest(networkHandler, mealApi.getRandomFood(), {it}, FoodsResponse(emptyList()))
+    override fun getRandomFood(): Either<Failure, FoodsResponse> {
+        val result = makeRequest(networkHandler, mealApi.getRandomFood(), {it}, FoodsResponse(emptyList()))
+
+        return if(result.isLeft){
+            val localResult = foodDao.getRandomFood()
+
+            if(localResult.isEmpty()) result
+            else Either.Right(FoodsResponse(localResult))
+        } else result
+    }
 
     override fun saveFoods(foods: List<Food>): Either<Failure, Boolean> {
         val result = foodDao.saveFoods(foods)

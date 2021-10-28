@@ -9,13 +9,10 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity
 @JsonClass(generateAdapter = true)
-class User (
+class Like(
     @PrimaryKey(autoGenerate = true)
-    val idUser: Int = 0,
-    val userName: String = "",
-    val password: String = ""
-    //val mail: String = "",
-    //val img: String = "",
-    //val token: String = ""
+    val idLike: Int = 0,
+    val idLikeFood: Int = 0,
+    val idLikeUser: Int = 0
 ): Parcelable {
 }
