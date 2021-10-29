@@ -6,27 +6,46 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.k2p.R
+import com.example.k2p.core.extension.failure
+import com.example.k2p.core.extension.observe
+import com.example.k2p.core.presentation.BaseFragment
+import com.example.k2p.core.presentation.BaseViewState
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.WithFragmentBindings
+import kotlinx.coroutines.DelicateCoroutinesApi
 
-class AccountFragment : Fragment() {
+@DelicateCoroutinesApi
+@AndroidEntryPoint
+@WithFragmentBindings
+class AccountFragment : BaseFragment(R.layout.account_fragment) {
 
-    companion object {
-        fun newInstance() = AccountFragment()
+    private val accountViewModel by viewModels<AccountViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        accountViewModel.apply {
+            observe(state, ::onViewStateChanged)
+            failure(failure, ::handleFailure)
+
+            getLocalUser()
+        }
     }
 
-    private lateinit var viewModel: AccountViewModel
+    override fun onViewStateChanged(state: BaseViewState?) {
+        super.onViewStateChanged(state)
+        when(state){
+            is AccountViewState.LoggedUser -> {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.account_fragment, container, false)
+            }
+            is AccountViewState.UserNotFound -> {
+                navController.navigate(AccountFragmentDirections.actionAccountFragmentToLoginFragment())
+            }
+        }
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(AccountViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun setBinding(view: View) {
     }
-
 }

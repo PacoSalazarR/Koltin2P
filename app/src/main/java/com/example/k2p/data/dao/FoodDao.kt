@@ -37,10 +37,13 @@ interface FoodDao {
     fun getUserById(filter: String): User
 
     @Query("SELECT * FROM User WHERE userName LIKE :filter")
-    fun getUserByName(filter: String): User
+    fun getUserByName(filter: String): List<User>
 
     @Query("SELECT * FROM `Like` WHERE idLikeUser LIKE :filter")
     fun getUserLikes(filter: String): Like
+
+    @Query("SELECT * FROM User")
+    fun getAllUsers(): List<User>
 
     @Insert(onConflict = REPLACE)
     fun saveLike(likes: List<Like>): List<Long>

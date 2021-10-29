@@ -7,26 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.k2p.R
+import com.example.k2p.core.presentation.BaseFragment
+import com.example.k2p.databinding.LoginFragmentBinding
+import com.example.k2p.presentation.signup.SignUpFragmentDirections
 
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment(R.layout.login_fragment) {
 
-    companion object {
-        fun newInstance() = LoginFragment()
-    }
+    private lateinit var binding: LoginFragmentBinding
 
-    private lateinit var viewModel: LoginViewModel
+    override fun setBinding(view: View) {
+        binding = LoginFragmentBinding.bind(view)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.login_fragment, container, false)
-    }
+        binding.txtGoToSignUp.setOnClickListener {
+            navController.navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
+        }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-        // TODO: Use the ViewModel
+        binding.btnLogin.setOnClickListener {
+            navController.navigate(LoginFragmentDirections.actionLoginFragmentToAccountFragment())
+        }
     }
 
 }
