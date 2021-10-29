@@ -40,7 +40,7 @@ class AccountFragment : BaseFragment(R.layout.account_fragment) {
         super.onViewStateChanged(state)
         when(state){
             is AccountViewState.LoggedUser -> {
-
+                binding.txtAccUserName.text = state.user.userName
             }
             is AccountViewState.UserNotFound -> {
                 navController.navigate(AccountFragmentDirections.actionAccountFragmentToLoginFragment())
@@ -50,5 +50,9 @@ class AccountFragment : BaseFragment(R.layout.account_fragment) {
 
     override fun setBinding(view: View) {
         binding = AccountFragmentBinding.bind(view)
+
+        binding.btnLogout.setOnClickListener {
+            accountViewModel.logout()
+        }
     }
 }
