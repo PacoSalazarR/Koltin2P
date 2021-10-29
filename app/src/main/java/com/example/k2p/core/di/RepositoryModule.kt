@@ -5,9 +5,11 @@ import com.example.k2p.data.api.MealApi
 import com.example.k2p.data.dao.FoodDao
 import com.example.k2p.data.source.CategoryRepositoryImpl
 import com.example.k2p.data.source.FoodRepositoryImpl
+import com.example.k2p.data.source.LikeRepositoryImpl
 import com.example.k2p.data.source.UserRepositoryImpl
 import com.example.k2p.domain.repository.CategoryRepository
 import com.example.k2p.domain.repository.FoodRepository
+import com.example.k2p.domain.repository.LikeRepository
 import com.example.k2p.domain.repository.UserRepository
 import com.example.k2p.framework.api.ApiProvider
 import com.example.k2p.framework.db.FoodDb
@@ -41,4 +43,10 @@ object RepositoryModule {
     fun provideUserRepository(
         foodDb: FoodDb
     ): UserRepository = UserRepositoryImpl(foodDao = foodDb.foodDao())
+
+    @Provides
+    @Singleton
+    fun provideLikeRepository(
+      foodDb: FoodDb
+    ): LikeRepository = LikeRepositoryImpl(foodDao = foodDb.foodDao())
 }

@@ -1,10 +1,13 @@
 package com.example.k2p.presentation.meals
 
 import android.annotation.SuppressLint
+import android.text.method.MovementMethod
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.k2p.R
 import com.example.k2p.databinding.RandomLayoutBinding
 import com.example.k2p.domain.model.Food
 
@@ -31,10 +34,22 @@ class RandomMealAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     class ViewHolderRandomItem(private val binding: RandomLayoutBinding) :
         RecyclerView.ViewHolder(binding.root){
+
+        var flag: Boolean = false
                 fun bind(data: Food){
                     binding.food = data
 
-                    binding.imgMeal.load(data.urlMealThumb)
+                    binding.txtInstructions.movementMethod = ScrollingMovementMethod()
+
+                    binding.btnFav.setOnClickListener {
+                        flag = if(!flag){
+                            binding.btnFav.setImageResource(R.drawable.ic_full_star)
+                            true
+                        }else{
+                            binding.btnFav.setImageResource(R.drawable.ic_empty_star)
+                            false
+                        }
+                    }
                 }
         }
 }

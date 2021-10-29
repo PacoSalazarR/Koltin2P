@@ -36,7 +36,7 @@ class FoodAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(data: Food, listener: (food: Food)->Unit) {
             binding.item = data
 
-            binding.imgFood.load(data.urlMealThumb)
+            //binding.imgFood.load(data.urlMealThumb)
 
             binding.root.setOnClickListener {
                 listener(data)

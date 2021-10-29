@@ -24,6 +24,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:loadFromURLCircular="@{item.urlMealThumb}"
                 tools:src="@tools:sample/avatars"
                 android:layout_margin="10dp"/>
             <TextView
