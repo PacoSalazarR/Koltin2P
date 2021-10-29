@@ -25,11 +25,11 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 @DelicateCoroutinesApi
 class SignUpFragment : BaseFragment(R.layout.sign_up_fragment) {
 
-    private lateinit var user: User
+
     private lateinit var binding: SignUpFragmentBinding
     private val signUpViewModel by viewModels<SignUpViewModel>()
     private var listUsers: MutableList<User> = mutableListOf()
-    private var existingUsers: MutableList<User> = mutableListOf()
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,20 +39,38 @@ class SignUpFragment : BaseFragment(R.layout.sign_up_fragment) {
             failure(failure, ::handleFailure)
         }
         user = User(0,"","")
-        showToast("Inicio")
     }
 
     override fun onViewStateChanged(state: BaseViewState?) {
         super.onViewStateChanged(state)
         when(state){
-            is UserViewState.UsersReceived -> setUserList(state.users)
+            is UserViewState.UsersReceived -> {
+                if(checkUserList(state.users))
+                    showToast("This user already exists")
+                else
+                    signUp()
+            }
         }
     }
 
-    private fun setUserList(users: List<User>){
-        existingUsers = users.toMutableList()
+    private fun signUp(){
+        user.apply {
+            userName = binding.txtSignUpName.text.toString()
+            password = binding.txtSignUpPassword.text.toString()
+        }
+        listUsers.add(user)
+        signUpViewModel.saveUsers(listUsers)
+        listUsers = mutableListOf()
+        navController.navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
     }
 
+    private fun checkUserList(users: List<User>): Boolean{
+        return users.isNotEmpty()
+    }
+
+    private fun checkFields(): Boolean{
+        return (binding.txtSignUpName.text.isNotBlank()&&binding.txtSignUpPassword.text.isNotBlank())
+    }
 
     override fun setBinding(view: View) {
         binding = SignUpFragmentBinding.bind(view)
@@ -60,25 +78,10 @@ class SignUpFragment : BaseFragment(R.layout.sign_up_fragment) {
 
         binding.btnSignUp.setOnClickListener {
 
-            if(binding.txtSignUpName.text.isNotEmpty()&&binding.txtSignUpPassword.text.isNotEmpty()){
+            if(checkFields()){
                 signUpViewModel.doGetUserByName(binding.txtSignUpName.text.toString())
-                if(existingUsers.isEmpty()){
-                    showToast("el usuario todavía no existe")
-                    //navController.navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
-                }else{
-                    showToast("el usuario ya existe")
-                }
-                /*user.apply {
-                    userName = binding.txtSignUpName.text.toString()
-                    password = binding.txtSignUpPassword.text.toString()
-                }
-                signUpViewModel.doGetUserByName(user.userName)
-
-                listUsers.add(user)
-                signUpViewModel.saveUsers(listUsers)
-                listUsers.remove(user)*/
             }else{
-                showToast("hola")
+                showToast("Some fields are missing")
             }
         }
 
@@ -86,6 +89,4 @@ class SignUpFragment : BaseFragment(R.layout.sign_up_fragment) {
             navController.navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
         }
     }
-
-
 }

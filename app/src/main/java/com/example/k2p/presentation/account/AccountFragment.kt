@@ -12,6 +12,7 @@ import com.example.k2p.core.extension.failure
 import com.example.k2p.core.extension.observe
 import com.example.k2p.core.presentation.BaseFragment
 import com.example.k2p.core.presentation.BaseViewState
+import com.example.k2p.databinding.AccountFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -21,6 +22,7 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 @WithFragmentBindings
 class AccountFragment : BaseFragment(R.layout.account_fragment) {
 
+    private lateinit var binding: AccountFragmentBinding
     private val accountViewModel by viewModels<AccountViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,5 +49,6 @@ class AccountFragment : BaseFragment(R.layout.account_fragment) {
     }
 
     override fun setBinding(view: View) {
+        binding = AccountFragmentBinding.bind(view)
     }
 }
