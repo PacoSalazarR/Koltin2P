@@ -1,11 +1,7 @@
 package com.example.k2p.presentation.mealdetail
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.k2p.R
@@ -15,8 +11,8 @@ import com.example.k2p.core.presentation.BaseFragment
 import com.example.k2p.core.presentation.BaseViewState
 import com.example.k2p.databinding.DetailFoodFragmentBinding
 import com.example.k2p.domain.model.Food
-import com.example.k2p.presentation.meals.FoodViewState
-import com.example.k2p.presentation.meals.RandomMealAdapter
+import com.example.k2p.presentation.foods.FoodViewState
+import com.example.k2p.presentation.random.RandomMealAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
 import kotlinx.coroutines.DelicateCoroutinesApi

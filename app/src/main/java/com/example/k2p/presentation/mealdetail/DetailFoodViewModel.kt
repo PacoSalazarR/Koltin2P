@@ -1,11 +1,10 @@
 package com.example.k2p.presentation.mealdetail
 
-import androidx.lifecycle.ViewModel
 import com.example.k2p.core.presentation.BaseViewModel
 import com.example.k2p.domain.model.Food
 import com.example.k2p.domain.usecase.GetFoodById
 import com.example.k2p.domain.usecase.SaveFoods
-import com.example.k2p.presentation.meals.FoodViewState
+import com.example.k2p.presentation.foods.FoodViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.DelicateCoroutinesApi
 import javax.inject.Inject

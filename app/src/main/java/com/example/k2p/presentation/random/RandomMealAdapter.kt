@@ -1,12 +1,10 @@
-package com.example.k2p.presentation.meals
+package com.example.k2p.presentation.random
 
 import android.annotation.SuppressLint
-import android.text.method.MovementMethod
 import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.example.k2p.R
 import com.example.k2p.databinding.RandomLayoutBinding
 import com.example.k2p.domain.model.Food

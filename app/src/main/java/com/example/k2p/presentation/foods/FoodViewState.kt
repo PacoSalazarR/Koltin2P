@@ -1,4 +1,4 @@
-package com.example.k2p.presentation.meals
+package com.example.k2p.presentation.foods
 
 import com.example.k2p.core.presentation.BaseViewState
 import com.example.k2p.domain.model.Food

@@ -20,12 +20,12 @@
     </fragment>
     <fragment
         android:id="@+id/randomMealFragment"
-        android:name="com.example.k2p.presentation.meals.RandomMealFragment"
+        android:name="com.example.k2p.presentation.random.RandomMealFragment"
         android:label="random_meal_fragment"
         tools:layout="@layout/random_meal_fragment" />
     <fragment
         android:id="@+id/foodFragment"
-        android:name="com.example.k2p.presentation.meals.FoodFragment"
+        android:name="com.example.k2p.presentation.foods.FoodFragment"
         android:label="food_fragment"
         tools:layout="@layout/food_fragment" >
 

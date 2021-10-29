@@ -1,4 +1,4 @@
-package com.example.k2p.presentation.meals
+package com.example.k2p.presentation.random
 
 import android.os.Bundle
 import android.view.View
@@ -10,6 +10,7 @@ import com.example.k2p.core.presentation.BaseFragment
 import com.example.k2p.core.presentation.BaseViewState
 import com.example.k2p.databinding.RandomMealFragmentBinding
 import com.example.k2p.domain.model.Food
+import com.example.k2p.presentation.foods.FoodViewState
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.WithFragmentBindings
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -20,7 +21,7 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 class RandomMealFragment : BaseFragment(R.layout.random_meal_fragment) {
 
     private lateinit var binding: RandomMealFragmentBinding
-    private val adapter: RandomMealAdapter by lazy { RandomMealAdapter()}
+    private val adapter: RandomMealAdapter by lazy { RandomMealAdapter() }
 
     private val foodViewModel by viewModels<RandomMealViewModel>()
 
