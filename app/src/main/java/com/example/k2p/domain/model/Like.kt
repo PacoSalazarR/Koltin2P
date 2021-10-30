@@ -12,7 +12,7 @@ import kotlinx.parcelize.Parcelize
 class Like(
     @PrimaryKey(autoGenerate = true)
     val idLike: Int = 0,
-    val idLikeFood: Int = 0,
-    val idLikeUser: Int = 0
+    var idLikeFood: Int = 0,
+    var idLikeUser: Int = 0
 ): Parcelable {
 }

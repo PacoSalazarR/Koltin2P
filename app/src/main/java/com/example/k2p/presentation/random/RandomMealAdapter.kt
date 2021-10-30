@@ -39,15 +39,6 @@ class RandomMealAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
                     binding.txtInstructions.movementMethod = ScrollingMovementMethod()
 
-                    binding.btnFav.setOnClickListener {
-                        flag = if(!flag){
-                            binding.btnFav.setImageResource(R.drawable.ic_full_star)
-                            true
-                        }else{
-                            binding.btnFav.setImageResource(R.drawable.ic_empty_star)
-                            false
-                        }
-                    }
                 }
         }
 }

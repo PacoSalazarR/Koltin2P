@@ -24,15 +24,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:src="@tools:sample/avatars"/>
 
-        <ImageView
-            android:id="@+id/btnFav"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:layout_constraintTop_toTopOf="@id/txtViewMealName"
-            app:layout_constraintBottom_toBottomOf="@id/txtViewMealName"
-            app:layout_constraintEnd_toEndOf="@id/imgMeal"
-            android:src="@drawable/ic_empty_star"/>
-
         <TextView
             android:id="@+id/txtViewMealName"
             android:layout_width="0dp"
